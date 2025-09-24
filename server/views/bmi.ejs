@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>BMI Calculator - Gym_Era</title>
+    <%- include('partials/head') %>
+</head>
+<body>
+    <%- include('partials/navbar') %>
+
+    <div class="container mt-5">
+        <h2 class="mb-4">🧮 BMI Calculator</h2>
+        <div class="card p-4">
+            <form id="bmiForm">
+                <div class="mb-3">
+                    <label class="form-label">Height (in cm)</label>
+                    <input type="number" id="height" class="form-control" placeholder="e.g. 175" required>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Weight (in kg)</label>
+                    <input type="number" id="weight" class="form-control" placeholder="e.g. 70" required>
+                </div>
+                <button type="submit" class="btn btn-success w-100">Calculate My BMI</button>
+            </form>
+            <div id="result" class="mt-4 p-3 rounded" style="display:none;"></div>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('bmiForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const heightCm = parseFloat(document.getElementById('height').value);
+            const weight = parseFloat(document.getElementById('weight').value);
+
+            if (!heightCm || !weight) {
+                alert("Please enter valid numbers");
+                return;
+            }
+
+            const heightM = heightCm / 100;
+            const bmi = weight / (heightM * heightM);
+            let category = '';
+            let color = '';
+
+            if (bmi < 18.5) {
+                category = 'Underweight 😟';
+                color = '#ff6b6b';
+            } else if (bmi < 25) {
+                category = 'Normal weight 😊';
+                color = '#51cf66';
+            } else if (bmi < 30) {
+                category = 'Overweight 😕';
+                color = '#ffd43b';
+            } else {
+                category = 'Obesity 😟';
+                color = '#ff6b6b';
+            }
+
+            const resultDiv = document.getElementById('result');
+            resultDiv.style.display = 'block';
+            resultDiv.style.backgroundColor = color + '20';
+            resultDiv.style.color = color;
+            resultDiv.innerHTML = `
+                <h4>Your BMI: <strong>${bmi.toFixed(2)}</strong></h4>
+                <p>Category: <strong>${category}</strong></p>
+                <p>💡 Tip: Consult a trainer or nutritionist for personalized advice.</p>
+            `;
+        });
+    </script>
+</body>
+</html>

@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 {
   "name": "fitzone",
   "version": "1.0.0",
@@ -28,34 +27,3 @@
     "nodemon": "^3.0.1"
   }
 }
-=======
-{
-  "name": "fitzone",
-  "version": "1.0.0",
-  "description": "Gym website with login, exercises, BMI, posture",
-  "main": "server/app.js",
-  "scripts": {
-    "start": "node server/app.js",
-    "dev": "nodemon server/app.js"
-  },
-  "dependencies": {
-    "axios": "^1.12.2",
-    "bcrypt": "^5.1.1",
-    "connect-flash": "^0.1.1",
-    "csurf": "^1.11.0",
-    "dotenv": "^16.6.1",
-    "ejs": "^3.1.9",
-    "express": "^4.21.2",
-    "express-mysql-session": "^3.0.0",
-    "express-rate-limit": "^8.1.0",
-    "express-session": "^1.18.2",
-    "express-validator": "^7.2.1",
-    "mysql2": "^3.15.0",
-    "passport": "^0.6.0",
-    "passport-local": "^1.0.0"
-  },
-  "devDependencies": {
-    "nodemon": "^3.0.1"
-  }
-}
->>>>>>> b9ce477c95ecf61e583c99007925dbdbaecd3cbd

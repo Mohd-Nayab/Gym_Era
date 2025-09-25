@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>💪 Gym_Era - Exercises</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/css/exercises.css">
+</head>
+<body class="bg-gradient">
+
+    <%- include('partials/navbar') %>
+
+    <div class="container my-5">
+        <div class="text-center mb-5">
+            <h1 class="display-4 fw-bold text-black">🔥 Top Exercises</h1>
+            <p class="lead text-black opacity-75">Master your fitness with these proven movements</p>
+        </div>
+
+        <!-- Filter Buttons -->
+        <div class="d-flex justify-content-center flex-wrap gap-2 mb-5">
+            <button class="filter-pill active" data-filter="all">
+                <span>All</span>
+            </button>
+            <button class="filter-pill" data-filter="chest">
+                <span>💥 Chest</span>
+            </button>
+            <button class="filter-pill" data-filter="back">
+                <span>🦾 Back</span>
+            </button>
+            <button class="filter-pill" data-filter="legs">
+                <span>🦵 Legs</span>
+            </button>
+            <button class="filter-pill" data-filter="shoulders">
+                <span> deltoids</span>
+            </button>
+            <button class="filter-pill" data-filter="arms">
+                <span>💪 Arms</span>
+            </button>
+        </div>
+
+        <!-- ✅ THIS MUST EXIST — with EXACT id -->
+        <div class="row g-4" id="exercises-container">
+            <!-- Dynamically inserted by JS -->
+        </div>
+    </div>
+
+    <!-- ✅ SCRIPT AT THE BOTTOM — AFTER HTML -->
+    <script>
+        // ✅ GET DATA FROM SERVER
+        const exercises = JSON.parse('<%- exercises %>');
+
+        function renderExercises(filter = 'all') {
+            const container = document.getElementById('exercises-container');
+            if (!container) {
+                console.error('❌ #exercises-container not found!');
+                return;
+            }
+            container.innerHTML = '';
+
+            const filtered = filter === 'all'
+                ? exercises
+                : exercises.filter(ex => ex.body_part === filter);
+
+            filtered.forEach((ex, index) => {
+                const col = document.createElement('div');
+                col.className = 'col-md-6 col-lg-4 exercise-item';
+                col.style.animationDelay = `${index * 0.1}s`;
+                col.innerHTML = `
+                    <div class="exercise-card">
+                        <div class="exercise-image">
+                            <img src="${ex.image_url}" alt="${ex.name}" 
+                                 onerror="this.src='https://via.placeholder.com/400x250/4338ca/ffffff?text=${encodeURIComponent(ex.name)}'">
+                            <div class="overlay">
+                                <div class="badge ${getBodyPartClass(ex.body_part)}">
+                                    ${capitalize(ex.body_part)}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="exercise-body">
+                            <h3 class="exercise-title">${ex.name}</h3>
+                            <p class="exercise-desc">${ex.description}</p>
+                        </div>
+                    </div>
+                `;
+                container.appendChild(col);
+            });
+
+            // Setup observers for new items
+            setupObservers();
+        }
+
+        function getBodyPartClass(part) {
+            const classes = {
+                chest: 'bg-danger',
+                back: 'bg-success',
+                legs: 'bg-primary',
+                shoulders: 'bg-warning',
+                arms: 'bg-info'
+            };
+            return classes[part] || 'bg-secondary';
+        }
+
+        function capitalize(str) {
+            return str.charAt(0).toUpperCase() + str.slice(1);
+        }
+
+        function setupObservers() {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('animate-in');
+                    }
+                });
+            }, { threshold: 0.1 });
+
+            document.querySelectorAll('.exercise-item').forEach(item => {
+                observer.observe(item);
+            });
+        }
+
+        // ✅ Wait for DOM
+        document.addEventListener('DOMContentLoaded', function() {
+            renderExercises();
+
+            document.querySelectorAll('.filter-pill').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    document.querySelectorAll('.filter-pill').forEach(b => b.classList.remove('active'));
+                    this.classList.add('active');
+                    renderExercises(this.dataset.filter);
+                });
+            });
+        });
+    </script>
+
+</body>
+</html>

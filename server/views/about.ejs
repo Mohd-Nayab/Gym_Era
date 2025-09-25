@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= title %></title>
+    <%- include('partials/head') %>
+    <style>
+        .trainer-card {
+            max-width: 900px;
+            margin: 2rem auto;
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+        .trainer-header {
+            background: linear-gradient(120deg, #0f0c29, #302b63);
+            padding: 2rem;
+            text-align: center;
+            color: white;
+        }
+        .trainer-avatar {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid white;
+            margin: 0 auto -75px auto;
+            background: #ddd;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+        }
+        .trainer-body {
+            padding: 5rem 2rem 2rem;
+            color: white;
+        }
+        .cert-badge {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.15);
+            padding: 0.5rem 1.2rem;
+            border-radius: 50px;
+            margin: 0.5rem;
+            font-weight: 600;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        .section-title {
+            border-bottom: 2px solid rgba(255, 255, 255, 0.2);
+            padding-bottom: 0.5rem;
+            margin: 1.5rem 0;
+        }
+    </style>
+</head>
+<body class="bg-black">
+
+    <%- include('partials/navbar') %>
+
+    <div class="trainer-card">
+        <div class="trainer-header">
+          <img src="/images/trainer.jpg" alt="Mohammad Nayab" class="trainer-avatar">
+            <h1 class="mt-4">Mohammad Nayab</h1>
+            <p class="lead">Certified Personal Trainer & Nutrition Coach</p>
+        </div>
+
+        <div class="trainer-body">
+            <p>
+                With over 8 years of experience in fitness coaching, I help clients transform their bodies and minds through science-backed training and sustainable nutrition.
+            </p>
+
+            <h3 class="section-title">🏅 Certifications</h3>
+            <div>
+                <span class="cert-badge">NASM-CPT</span>
+                <span class="cert-badge">ACE Fitness Nutrition Specialist</span>
+                <span class="cert-badge">CPR/AED Certified</span>
+            </div>
+
+            <h3 class="section-title">💪 Specialties</h3>
+            <ul>
+                <li>Weight Loss & Fat Burning Programs</li>
+                <li>Muscle Building & Strength Training</li>
+                <li>Posture Correction & Mobility</li>
+                <li>Beginner-Friendly Workout Plans</li>
+            </ul>
+
+           <h3 class="section-title">📩 Contact Me</h3>
+<div class="d-flex flex-wrap gap-3 mt-3">
+  <!-- Email -->
+  <a href="mailto:nayab11nov@gmail.com" class="btn btn-outline-light btn-sm px-3 py-2">
+    <i class="bi bi-envelope-fill me-1"></i> Email
+  </a>
+
+  <!-- Phone -->
+  <a href="tel:+(9716389158)" class="btn btn-outline-light btn-sm px-3 py-2">
+    <i class="bi bi-telephone-fill me-1"></i> Call
+  </a>
+
+  <!-- Facebook -->
+  <a href="https://www.facebook.com/yourprofile" target="_blank" rel="noopener" class="btn btn-outline-primary btn-sm px-3 py-2">
+    <i class="bi bi-facebook me-1"></i> Facebook
+  </a>
+
+  <!-- Instagram -->
+  <a href="https://www.instagram.com/yourhandle" target="_blank" rel="noopener" class="btn btn-outline-danger btn-sm px-3 py-2">
+    <i class="bi bi-instagram me-1"></i> Instagram
+  </a>
+</div>
+        </div>
+    </div>
+
+</body>
+</html>

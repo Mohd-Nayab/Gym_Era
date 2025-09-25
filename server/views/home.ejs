@@ -1,0 +1,18 @@
+<!-- server/views/home.ejs -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title><%= title %></title>
+    <%- include('partials/head') %>
+</head>
+<body>
+    <%- include('partials/navbar') %>
+
+    <div class="container mt-5">
+        <h1>Welcome to Gym_Era 🏋️</h1>
+        <p>Your personal fitness companion.</p>
+        <a href="/bmi" class="btn btn-primary">Calculate BMI</a>
+        <a href="/posture" class="btn btn-secondary">Fix Posture</a>
+    </div>
+</body>
+</html>

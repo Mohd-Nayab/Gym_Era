@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Diet Plans - Gym_Era</title>
+    <%- include('partials/head') %>
+    <style>
+        .card-img-top {
+            height: 200px;
+            object-fit: cover;
+        }
+        .filter-bar {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 25px;
+        }
+    </style>
+</head>
+<body>
+    <%- include('partials/navbar') %>
+
+    <div class="container mt-5">
+        <h2 class="mb-3">🍽️ Meal Plans</h2>
+        <p>Choose a plan that fits your goals or dietary needs.</p>
+
+        <!-- 🔍 Filter Form -->
+        <form method="GET" action="/diet" class="filter-bar row g-3">
+            <div class="col-md-4">
+                <select name="category" class="form-select">
+                    <option value="">All Categories</option>
+                    <option value="Veg">Vegetarian</option>
+                    <option value="Non-Veg">Non-Vegetarian</option>
+                    <option value="Vegan">Vegan</option>
+                    <option value="Lactose-Free">Lactose-Free</option>
+                </select>
+            </div>
+            <div class="col-md-4">
+                <select name="meal_time" class="form-select">
+                    <option value="">All Meals</option>
+                    <option value="Breakfast">Breakfast</option>
+                    <option value="Lunch">Lunch</option>
+                    <option value="Snack">Snack</option>
+                    <option value="Dinner">Dinner</option>
+                </select>
+            </div>
+            <div class="col-md-4 d-grid">
+                <button type="submit" class="btn btn-success">Filter Plans</button>
+            </div>
+        </form>
+
+        <!-- 📋 Diet Cards -->
+        <div class="row">
+            <% if (plans && plans.length > 0) { %>
+                <% plans.forEach(plan => { %>
+                    <div class="col-md-4 mb-4">
+                        <div class="card h-100 shadow-sm">
+                            <img src="<%= plan.image_url || '/images/placeholder.jpg' %>" class="card-img-top" alt="<%= plan.title %>">
+                            <div class="card-body d-flex flex-column">
+                                <h5 class="card-title d-flex align-items-center">
+                                    <% if (plan.icon_url) { %>
+                                        <img src="<%= plan.icon_url %>" width="24" class="me-2">
+                                    <% } %>
+                                    <%= plan.title %>
+                                </h5>
+                                <p class="card-text"><%= plan.description %></p>
+                                <div class="mt-auto">
+                                    <span class="badge bg-primary"><%= plan.meal_time %></span>
+                                    <span class="badge bg-success">🔥 <%= plan.calories %> kcal</span>
+                                    <span class="badge bg-info text-dark"><%= plan.category %></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                <% }) %>
+            <% } else { %>
+                <div class="col-12">
+                    <div class="alert alert-warning text-center">No diet plans available right now.</div>
+                </div>
+            <% } %>
+        </div>
+    </div>
+</body>
+</html>

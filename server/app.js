@@ -51,8 +51,9 @@ app.use((req, res, next) => {
 // ── Routes ──
 app.use('/', require('./routes/auth'));       // Auth: login/register/logout
 app.use('/', require('./routes/pages'));      // Static or general pages
-app.use('/dashboard', require('./routes/dashboard'));
 app.use('/exercises', require('./routes/exercises'));
+app.use('/dashboard', require('./routes/dashboard'));
+
 app.use('/gyms', require('./routes/gyms'));
 app.use('/gallery', require('./routes/gallery'));
 app.use('/diet', require('./routes/diet'));
